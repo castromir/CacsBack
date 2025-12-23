@@ -1,0 +1,33 @@
+﻿@page "/ficha/{Id:guid}"
+
+@using Cacs.Shared.Dtos          @* namespace do FichaDto *@
+@using Cacs.Web.Services         @* namespace do FichaClient *@
+
+@inject FichaClient Fichas
+
+<h3>Ficha</h3>
+
+@if (_ficha is null)
+{
+    <p>Carregando...</p>
+}
+else
+{
+    <div>
+        <strong>@_ficha.NomePersonagem</strong> — @_ficha.NomeJogador
+        <div>NEX: @_ficha.NEX</div>
+        <div>PV: @_ficha.PV | SAN: @_ficha.SAN | PE: @_ficha.PE</div>
+        <div>Defesa: @_ficha.Defesa | Bloqueio: @_ficha.Bloqueio | Esquiva: @_ficha.Esquiva</div>
+        <div>Classe: @_ficha.Classe | Origem: @_ficha.Origem | Deslocamento: @_ficha.Deslocamento</div>
+    </div>
+}
+
+@code {
+    [Parameter] public Guid Id { get; set; }
+    private FichaDto? _ficha;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        _ficha = await Fichas.ObterFichaAsync(Id);
+    }
+}

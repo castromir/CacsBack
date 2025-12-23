@@ -24,7 +24,7 @@ namespace Cacs.Domain.Models
         public Habilidade(
             string nome,
             string descricao,
-            FonteHabilidade fonte,
+            FonteHabilidade fonte, 
             ClasseBase? classeRequerida = null,
             Trilha? trilhaRequerida = null,
             Origem? origemRequerida = null,

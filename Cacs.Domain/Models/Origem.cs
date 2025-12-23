@@ -8,6 +8,8 @@ namespace Cacs.Domain.Models
         public Habilidade Habilidade { get; private set; } = null!;
 
         public static readonly List<Pericia> Pericias = [];
+        private List<string> periciasTreinadas;
+
         public IReadOnlyCollection<Pericia> PericiasTreinadas { get; private set; } = null!;
 
         public Origem(string nome, string descricao, IEnumerable<Pericia> periciasTreinadas, Habilidade habilidade)
@@ -25,6 +27,12 @@ namespace Cacs.Domain.Models
 
         protected Origem()
         {
+        }
+
+        public Origem(string nome, List<string> periciasTreinadas)
+        {
+            Nome = nome;
+            this.periciasTreinadas = periciasTreinadas;
         }
 
         public void DefinirNome(string nome)

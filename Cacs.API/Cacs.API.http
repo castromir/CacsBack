@@ -1,0 +1,6 @@
+@Cacs.API_HostAddress = http://localhost:5084
+
+GET {{Cacs.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

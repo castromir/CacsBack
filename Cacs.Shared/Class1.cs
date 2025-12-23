@@ -1,4 +1,4 @@
-﻿namespace Cacs.Application
+﻿namespace Cacs.Shared
 {
     public class Class1
     {

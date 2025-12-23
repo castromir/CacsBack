@@ -17,4 +17,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Cacs.Shared\Cacs.Shared.csproj" />
+    <ProjectReference Include="..\Cacs.Domain\Cacs.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

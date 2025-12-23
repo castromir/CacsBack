@@ -2,7 +2,7 @@ namespace Cacs.Domain.Models
 {
     using Cacs.Domain.Models.Classe;
     using Cacs.Domain.Models.Enums;
-    using Cacs.Models.Itens;
+    using Cacs.Domain.Models.Itens;
 
     /// <summary>
     /// Representa a ficha de um personagem, contendo atributos,
