@@ -1,6 +1,6 @@
-﻿@page "/ficha/{Id:guid}"
+@page "/ficha/{Id:guid}"
 
-@using Cacs.Shared.Dtos          @* namespace do FichaDto *@
+@using Cacs.Application.Dtos          @* namespace do FichaDto *@
 @using Cacs.Web.Services         @* namespace do FichaClient *@
 
 @inject FichaClient Fichas
@@ -14,7 +14,7 @@
 else
 {
     <div>
-        <strong>@_ficha.NomePersonagem</strong> — @_ficha.NomeJogador
+        <strong>@_ficha.NomePersonagem</strong> � @_ficha.NomeJogador
         <div>NEX: @_ficha.NEX</div>
         <div>PV: @_ficha.PV | SAN: @_ficha.SAN | PE: @_ficha.PE</div>
         <div>Defesa: @_ficha.Defesa | Bloqueio: @_ficha.Bloqueio | Esquiva: @_ficha.Esquiva</div>

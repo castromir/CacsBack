@@ -2,7 +2,7 @@ namespace Cacs.Domain.Models.Classe
 {
     public class Especialista : ClasseBase
     {
-        public Especialista() 
+        public Especialista()
         {
             this.PontosVidaInicial = 16;
             this.PontosEsforcoInicial = 3;

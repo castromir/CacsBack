@@ -1,102 +1,76 @@
 root = true
 
-[*.cs]
-
-# Encoding e layout
+[*]
 charset = utf-8
-indent_style = space
-indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# -------------------
-# Roslyn Analyzers
-# -------------------
-dotnet_diagnostic.SA1633.severity = none
-dotnet_diagnostic.SA1600.severity = none
-dotnet_diagnostic.SA1009.severity = none
-dotnet_diagnostic.SA1111.severity = none
-dotnet_diagnostic.SA1201.severity = none
-dotnet_diagnostic.SA1010.severity = none
-dotnet_diagnostic.SA1516.severity = none
-dotnet_diagnostic.SA1602.severity = none
-dotnet_diagnostic.SA1615.severity = none
-dotnet_diagnostic.SA1611.severity = none
+[*.{cs,csx,vb,vbx}]
+indent_style = space
+indent_size = 4
 
-# Evita usings não utilizados (warning)
+[*.{csproj,props,targets,slnx}]
+indent_style = space
+indent_size = 2
+
+[*.{json,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.cs]
+# Organização de usings
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+# var
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = false:suggestion
+
+# Expression-bodied members
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_constructors = false:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+csharp_style_expression_bodied_accessors = true:suggestion
+
+# Nullability
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+
+# Qualidade
 dotnet_diagnostic.IDE0005.severity = warning
-
-# Usa var quando o tipo é óbvio (suggestion)
-dotnet_diagnostic.IDE0007.severity = suggestion
-
-# Usa tipo explícito quando o tipo não é óbvio (suggestion)
-dotnet_diagnostic.IDE0008.severity = suggestion
-
-# Remove código morto (warning)
 dotnet_diagnostic.IDE0051.severity = warning
-
-# Simplifica expressões (suggestion)
-dotnet_diagnostic.IDE0009.severity = suggestion
-
-# Evita parâmetros não usados (warning)
+dotnet_diagnostic.IDE0043.severity = warning
 dotnet_diagnostic.CS0168.severity = warning
 dotnet_diagnostic.CS0219.severity = warning
-
-# Usa nameof em vez de strings (warning)
-dotnet_diagnostic.IDE0043.severity = warning
-
-# -------------------
-# StyleCop Analyzers
-# -------------------
-
-# Campos privados devem começar com _
-dotnet_diagnostic.SA1309.severity = warning
-
-# Parâmetros e variáveis locais camelCase
-dotnet_diagnostic.SA1300.severity = warning
-
-# Exige chaves em blocos, mesmo para uma linha
-dotnet_diagnostic.SA1503.severity = warning
-
-# Exige espaço entre operadores binários
-dotnet_diagnostic.SA1027.severity = warning
-
-# Exige comentários XML para membros públicos e protegidos
-
-# Comentários XML com tags corretas
-dotnet_diagnostic.SA1611.severity = warning
-
-# Requer uso de this. para membros da classe
-dotnet_diagnostic.SA1101.severity = warning
-
-# Remove espaços em branco extras
-dotnet_diagnostic.SA1028.severity = warning
-
-# Usa 'using' fora do namespace
-dotnet_diagnostic.SA1200.severity = warning
-
-# Ordena usings alfabeticamente
-dotnet_diagnostic.SA1210.severity = warning
-
-# Exige linhas em branco entre membros
-dotnet_diagnostic.SA1507.severity = warning
-
-# C# coding styles
-
-# Preferência por expressão lambda com parênteses
-csharp_style_parentheses_in_lambda_expression_parameters = always_for_clarity:suggestion
-
-# Qualidade e segurança
-
-# Evitar métodos públicos estáticos sem contexto
-dotnet_diagnostic.CA1822.severity = warning
-
-# Detecta possíveis problemas de nulidade
 dotnet_diagnostic.CS8602.severity = warning
 dotnet_diagnostic.CS8603.severity = warning
+dotnet_diagnostic.CA1822.severity = warning
 
-# Evita async void (warning)
-dotnet_diagnostic.VSTHRD100.severity = warning
+# Documentação XML para APIs públicas
+dotnet_diagnostic.CS1591.severity = warning
 
-# Preferência para propriedades autoimplementadas
-dotnet_diagnostic.IDE0044.severity = suggestion
+# Formatação
+csharp_new_line_before_open_brace = all
+csharp_new_line_before_else = true
+csharp_new_line_before_catch = true
+csharp_new_line_before_finally = true
+csharp_indent_case_contents = true
+csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_around_binary_operators = before_and_after
+
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+
+csharp_prefer_braces = true:suggestion
+csharp_prefer_simple_using_statement = true:suggestion
+dotnet_style_prefer_auto_properties = true:suggestion
+
+[*.{razor,cshtml}]
+dotnet_diagnostic.CS1591.severity = none

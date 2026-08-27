@@ -1,4 +1,4 @@
-namespace Cacs.Shared.Dtos;
+namespace Cacs.Application.Dtos;
 
 public sealed record AtributoDto(string Nome, int Valor);
 

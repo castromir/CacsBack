@@ -1,4 +1,4 @@
-﻿namespace Cacs.Domain.Models.Enums
+namespace Cacs.Domain.Models.Enums
 {
     public enum FonteHabilidade
     {

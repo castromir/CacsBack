@@ -1,6 +1,5 @@
 using Cacs.Domain.Models;
 using Cacs.Domain.Models.Classe;
-using Cacs.Domain.Models.Itens;
 using Cacs.Domain.Models.Enums;
 
 namespace Cacs.Application.Services;

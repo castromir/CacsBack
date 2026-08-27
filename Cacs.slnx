@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Cacs.Domain/Cacs.Domain.csproj" />
+  <Project Path="Cacs.Application/Cacs.Application.csproj" />
+  <Project Path="Cacs.Web/Cacs.Web.csproj" />
+</Solution>

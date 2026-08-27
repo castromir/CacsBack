@@ -1,7 +1,9 @@
-using Cacs.Application.Mappers;
-using Cacs.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Cacs.Application.Dtos;
+using Cacs.Application.Mappers;
 using Cacs.Application.Services;
+
+namespace Cacs.Web.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
