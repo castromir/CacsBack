@@ -1,0 +1,149 @@
+@page "/"
+@rendermode InteractiveServer
+@implements IAsyncDisposable
+@inject NavigationManager Navigation
+
+<PageTitle>Categorias</PageTitle>
+
+<div class="min-h-screen bg-slate-950 text-slate-100">
+    <div class="mx-auto max-w-3xl px-6 py-10">
+        <header class="mb-10">
+            <h1 class="text-3xl font-bold tracking-tight">Categorias</h1>
+            <p class="mt-3 flex items-center gap-2 text-sm text-slate-400">
+                <span>Status</span>
+                <span class="@GetStatusBadgeClasses()">@_status</span>
+            </p>
+        </header>
+
+        <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            @foreach (var category in _categories)
+            {
+                <div class="flex flex-col items-center gap-3">
+                    <div class="flex h-28 w-full max-w-28 items-center justify-center rounded-xl border-2 border-slate-600 bg-slate-900 text-3xl font-bold">
+                        @category.Name
+                    </div>
+
+                    <input type="number"
+                           class="w-full max-w-28 rounded-lg border-2 border-slate-600 bg-slate-900 px-3 py-2 text-center text-xl outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                           value="@category.Value"
+                           @onchange="e => UpdateCategoryAsync(category.Name, e)" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    private HubConnection? _connection;
+    private string _status = "Conectando...";
+
+    private readonly List<CategoryState> _categories =
+    [
+        new("I"),
+        new("II"),
+        new("III"),
+        new("IV")
+    ];
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ConnectAsync();
+    }
+
+    private string GetStatusBadgeClasses() => _status switch
+    {
+        "Conectado" => "rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-medium text-emerald-400",
+        "Reconectando..." => "rounded-full bg-amber-500/15 px-3 py-1 text-xs font-medium text-amber-400",
+        _ when _status.StartsWith("Erro") => "rounded-full bg-red-500/15 px-3 py-1 text-xs font-medium text-red-400",
+        _ => "rounded-full bg-slate-500/15 px-3 py-1 text-xs font-medium text-slate-400",
+    };
+
+    private async Task ConnectAsync()
+    {
+        if (_connection is not null)
+        {
+            return;
+        }
+
+        _connection = new HubConnectionBuilder()
+            .WithUrl(Navigation.ToAbsoluteUri("/hubs/cacs"))
+            .WithAutomaticReconnect()
+            .Build();
+
+        _connection.On<string, int>("CategoryUpdated", (name, value) =>
+        {
+            var category = _categories.FirstOrDefault(c => c.Name == name);
+
+            if (category is not null)
+            {
+                category.Value = value;
+            }
+
+            return InvokeAsync(StateHasChanged);
+        });
+
+        _connection.Reconnecting += _ =>
+        {
+            _status = "Reconectando...";
+            return InvokeAsync(StateHasChanged);
+        };
+
+        _connection.Reconnected += _ =>
+        {
+            _status = "Conectado";
+            return InvokeAsync(StateHasChanged);
+        };
+
+        _connection.Closed += _ =>
+        {
+            _status = "Desconectado";
+            return InvokeAsync(StateHasChanged);
+        };
+
+        try
+        {
+            await _connection.StartAsync();
+            _status = "Conectado";
+        }
+        catch (Exception ex)
+        {
+            _status = $"Erro: {ex.Message}";
+        }
+    }
+
+    private async Task UpdateCategoryAsync(string name, ChangeEventArgs e)
+    {
+        if (_connection is null)
+        {
+            return;
+        }
+
+        if (!int.TryParse(e.Value?.ToString(), out var value))
+        {
+            return;
+        }
+
+        var category = _categories.FirstOrDefault(c => c.Name == name);
+
+        if (category is not null)
+        {
+            category.Value = value;
+        }
+
+        await _connection.InvokeAsync("UpdateCategory", name, value);
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_connection is not null)
+        {
+            await _connection.DisposeAsync();
+        }
+    }
+
+    private sealed class CategoryState(string name)
+    {
+        public string Name { get; } = name;
+        public int Value { get; set; }
+    }
+}

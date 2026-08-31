@@ -18,6 +18,17 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: Cacs.Web/package-lock.json
+
+      - name: Build Tailwind CSS
+        working-directory: Cacs.Web
+        run: npm ci && npm run build:css
+
       - name: Restore
         run: dotnet restore Cacs.slnx
 

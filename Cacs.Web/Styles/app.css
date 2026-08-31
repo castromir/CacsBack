@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@source "../Components/**/*.razor";
+@source "../Components/**/*.cshtml";
+@source "../Components/**/*.cs";
+
+#blazor-error-ui {
+    @apply fixed bottom-0 left-0 z-50 hidden w-full bg-yellow-100 px-5 py-2 shadow;
+}
+
+#blazor-error-ui .dismiss {
+    @apply absolute right-3 top-2 cursor-pointer;
+}

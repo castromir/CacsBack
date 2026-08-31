@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Cacs.Domain.Models.Players
 {
     public sealed class Categoria
@@ -17,6 +13,5 @@ namespace Cacs.Domain.Models.Players
             Nivel = nivel;
             Quantidade = quantidade;
         }
-
     }
 }

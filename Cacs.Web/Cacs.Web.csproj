@@ -1,11 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Cacs.Application\Cacs.Application.csproj" />
-  </ItemGroup>
-
-</Project>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cacs.Infrastructure\Cacs.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <Target Name="BuildTailwindCss" BeforeTargets="Build">
+    <Exec Command="npm run build:css" WorkingDirectory="$(ProjectDir)" />
+  </Target>
+
+</Project>

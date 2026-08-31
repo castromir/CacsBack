@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Cacs.Domain.Models.SeedWork;
 
 namespace Cacs.Domain.Models.Players
 {
-    public class Player: Entidade, IAggregateRoot
+    public class Player : Entidade, IAggregateRoot
     {
-        private string _email;
-
-        private string _name;
-
         private readonly List<Categoria> _categorias = [];
 
         public IReadOnlyCollection<Categoria> Categorias => _categorias;
@@ -38,12 +31,10 @@ namespace Cacs.Domain.Models.Players
             }
 
             if (valor < 0)
-            { 
+            {
                 throw new InvalidOperationException(
                     "O jogador não pode ter quantidade negativa.");
             }
         }
-
-
     }
 }
