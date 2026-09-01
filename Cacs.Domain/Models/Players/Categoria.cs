@@ -10,8 +10,25 @@ namespace Cacs.Domain.Models.Players
 
         public Categoria(CategoriaNivel nivel, int quantidade)
         {
+            if (quantidade < 0)
+            {
+                throw new InvalidOperationException(
+                    "A quantidade não pode ser negativa.");
+            }
+
             Nivel = nivel;
             Quantidade = quantidade;
+        }
+
+        public void AlterarQuantidade(int novaQuantidade)
+        {
+            if (novaQuantidade < 0)
+            {
+                throw new InvalidOperationException(
+                    "A quantidade não pode ser negativa.");
+            }
+
+            Quantidade = novaQuantidade;
         }
     }
 }
