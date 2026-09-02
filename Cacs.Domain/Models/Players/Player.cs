@@ -289,5 +289,5 @@ Quando encontrar uma classe vazia, faça estas perguntas nessa ordem:
         ↓
 10. Ela depende de outras classes?
         ↓
-11. Implemento os métodos
+11. Implemento os métodosg
 */
