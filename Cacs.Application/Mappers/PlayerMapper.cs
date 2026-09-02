@@ -11,10 +11,7 @@ namespace Cacs.Application.Mappers
         public static PlayerDto ToDto(Player player)
         {
             var categorias = player.Categorias
-                .Select(c => new CategoriaDto(
-                    c.Nivel,
-                    c.Quantidade,
-                    c.Pontos))
+                .Select(CategoriaMapper.ToDto)
                 .ToList();
 
             return new PlayerDto(
