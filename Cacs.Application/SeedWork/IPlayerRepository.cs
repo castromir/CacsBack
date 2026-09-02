@@ -1,15 +1,19 @@
 using Cacs.Domain.Models.Players;
 
-public interface IPlayerRepository
+
+namespace Cacs.Application.Repositories
 {
-    Task<Player?> ObterAsync(
-        Guid id,
-        CancellationToken cancellationToken = default);
+    public interface IPlayerRepository
+    {
+        Task<Player?> ObterAsync(
+            Guid id,
+            CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyList<Player>> ListarAsync(
-        CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<Player>> ListarAsync(
+            CancellationToken cancellationToken = default);
 
-    Task SalvarAsync(
-        Player player,
-        CancellationToken cancellationToken = default);
+        Task SalvarAsync(
+            Player player,
+            CancellationToken cancellationToken = default);
+    }
 }

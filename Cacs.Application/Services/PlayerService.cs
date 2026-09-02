@@ -1,4 +1,5 @@
 using Cacs.Application.Dtos;
+using Cacs.Application.Mappers;
 
 namespace Cacs.Application.Services
 {
@@ -15,7 +16,7 @@ namespace Cacs.Application.Services
         }
         public async Task<PlayerDto?> ObterAsync(Guid id)
         {
-            var player = await _repository.ObterAsync(id);
+            var player = await _playerRepository.ObterAsync(id);
 
             return player is null
                 ? null
